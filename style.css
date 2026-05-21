@@ -1,0 +1,151 @@
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: #244c4c;
+    color: white;
+}
+
+/* TOP BAR */
+.top-bar {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 40px;
+}
+
+.cam-icon {
+    font-size: 28px;
+    color: #b8ff5c;
+}
+
+.top-bar button {
+    background: none;
+    border: none;
+    font-size: 22px;
+    cursor: pointer;
+}
+
+/* CARD */
+.card {
+    background: #a79bdc;
+    width: 420px;
+    padding: 40px;
+    border-radius: 30px;
+    margin: 30px auto;
+    text-align: center;
+}
+
+.card h1 {
+    color: black;
+    font-size: 42px;
+}
+
+/* CAMERA */
+.camera-box {
+    text-align: center;
+}
+
+.video-feed {
+    width: 360px;
+    border-radius: 15px;
+    border: 3px solid #b8ff5c;
+}
+
+#live-emotion {
+    color: #b8ff5c;
+    margin-top: 10px;
+}
+
+/* BUTTON */
+.main-btn {
+    margin-top: 20px;
+    padding: 12px 28px;
+    border-radius: 10px;
+    border: none;
+    background: #b8ff5c;
+    color: black;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* MODE */
+.mode-title {
+    text-align: center;
+    color: #b8ff5c;
+    font-size: 36px;
+}
+
+.mode-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 150px);
+    gap: 20px;
+    justify-content: center;
+}
+
+.mode-grid a {
+    color: pink;
+    font-size: 22px;
+    text-decoration: none;
+}
+
+/* DECOR */
+.grid-left, .grid-right {
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    background-image:
+        linear-gradient(pink 2px, transparent 2px),
+        linear-gradient(90deg, pink 2px, transparent 2px);
+    background-size: 30px 30px;
+    opacity: 0.4;
+}
+
+.grid-left { top: 60px; left: 60px; }
+.grid-right { top: 60px; right: 60px; }
+
+.shape {
+    position: absolute;
+    bottom: 60px;
+    left: 60px;
+    width: 160px;
+    height: 160px;
+    background: #f5e77c;
+    border-radius: 50%;
+}
+
+.wave.yellow {
+    position: absolute;
+    bottom: 120px;
+    right: 60px;
+    width: 200px;
+    height: 20px;
+    background: orange;
+    border-radius: 50px;
+}
+
+.wave.purple {
+    position: absolute;
+    bottom: 80px;
+    right: 60px;
+    width: 200px;
+    height: 20px;
+    background: #d1a3ff;
+    border-radius: 50px;
+}
+
+.result-text {
+    text-align: center;
+    margin-top: 10px;
+}
+.video-feed-main {
+    width: 100%;
+    border-radius: 20px;
+}
+
+.card {
+    background: #a79bdc;
+    width: 420px;
+    padding: 20px;
+    border-radius: 30px;
+    margin: 40px auto;
+    text-align: center;
+}

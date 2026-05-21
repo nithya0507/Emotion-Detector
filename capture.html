@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Capture</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="top-bar">
+<span class="cam-icon">📷</span>
+<button onclick="takeScreenshot()">📸</button>
+</div>
+
+<div class="card">
+    <img src="/video" class="video-feed-main">
+    <p id="live-emotion">Detecting...</p>
+</div>
+
+<h2 class="mode-title">CAPTURE</h2>
+
+<button class="main-btn" onclick="capture()">Capture</button>
+
+<p class="result-text" id="emotion"></p>
+<img id="img" width="300">
+
+<script>
+function capture(){
+fetch('/capture',{method:'POST'})
+.then(r=>r.json())
+.then(d=>{
+document.getElementById("emotion").innerText=d.emotion;
+document.getElementById("img").src="data:image/jpeg;base64,"+d.image;
+});
+}
+</script>
+
+<script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+
+<script>
+setInterval(()=>{
+fetch('/current_emotion')
+.then(r=>r.json())
+.then(d=>{
+document.getElementById("live-emotion").innerText="Emotion: "+d.emotion;
+});
+},1000);
+
+function takeScreenshot(){
+html2canvas(document.body).then(canvas=>{
+let a=document.createElement('a');
+a.download='ss.png';
+a.href=canvas.toDataURL();
+a.click();
+});
+}
+</script>
+
+</body>
+</html>

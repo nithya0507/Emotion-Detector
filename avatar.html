@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="card">
+<img src="/video" class="video-feed-main">
+<p id="live-emotion"></p>
+</div>
+
+<button onclick="getAvatar()">Show Avatar</button>
+
+<div id="avatar" style="font-size:80px;text-align:center;"></div>
+
+<script>
+function getAvatar(){
+fetch('/current_emotion')
+.then(r=>r.json())
+.then(d=>{
+    return fetch('/get_avatar',{
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({emotion:d.emotion})
+    });
+})
+.then(r=>r.json())
+.then(d=>{
+    document.getElementById("avatar").innerText = d.emoji;
+});
+}
+</script>
+
+<script>
+setInterval(()=>{
+fetch('/current_emotion')
+.then(r=>r.json())
+.then(d=>{
+document.getElementById("live-emotion").innerText=d.emotion;
+});
+},1000);
+</script>
+
+</body>
+</html>

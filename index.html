@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Emotion AI</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="top-bar">
+<span class="cam-icon">📷</span>
+<button onclick="takeScreenshot()">📸</button>
+</div>
+
+<div class="card">
+    <img src="/video" class="video-feed-main">
+    <p id="live-emotion">Detecting...</p>
+</div>
+
+<div style="text-align:center;">
+<a href="/modes"><button class="main-btn">Go to Modes</button></a>
+</div>
+
+<div class="grid-left"></div>
+<div class="grid-right"></div>
+<div class="shape"></div>
+<div class="wave yellow"></div>
+<div class="wave purple"></div>
+
+<script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+
+<script>
+setInterval(()=>{
+fetch('/current_emotion')
+.then(r=>r.json())
+.then(d=>{
+document.getElementById("live-emotion").innerText="Emotion: "+d.emotion;
+});
+},1000);
+
+function takeScreenshot(){
+html2canvas(document.body).then(canvas=>{
+let a=document.createElement('a');
+a.download='ss.png';
+a.href=canvas.toDataURL();
+a.click();
+});
+}
+</script>
+
+</body>
+</html>

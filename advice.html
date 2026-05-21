@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Advice</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="top-bar">
+<span class="cam-icon">📷</span>
+<button onclick="takeScreenshot()">📸</button>
+</div>
+
+<div class="card">
+    <img src="/video" class="video-feed-main">
+    <p id="live-emotion">Detecting...</p>
+</div>
+
+<h2 class="mode-title">ADVICE</h2>
+
+<button class="main-btn" onclick="getAdvice()">Get Advice</button>
+
+<p class="result-text" id="advice"></p>
+
+<script>
+function getAdvice(){
+fetch('/current_emotion')
+.then(r=>r.json())
+.then(d=>{
+return fetch('/get_advice',{
+method:'POST',
+headers:{'Content-Type':'application/json'},
+body:JSON.stringify({emotion:d.emotion})
+});
+})
+.then(r=>r.json())
+.then(d=>{
+document.getElementById("advice").innerText=d.advice;
+});
+}
+</script>
+
+<script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+
+<script>
+setInterval(()=>{
+fetch('/current_emotion')
+.then(r=>r.json())
+.then(d=>{
+document.getElementById("live-emotion").innerText="Emotion: "+d.emotion;
+});
+},1000);
+
+function takeScreenshot(){
+html2canvas(document.body).then(canvas=>{
+let a=document.createElement('a');
+a.download='ss.png';
+a.href=canvas.toDataURL();
+a.click();
+});
+}
+</script>
+
+</body>
+</html>
